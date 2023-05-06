@@ -1,6 +1,7 @@
 import QtQuick 2.15
-import QtQuick.Window 2.1
+import QtQuick.Window 2.15
 import QtQuick.Controls
+
 
 Window {
     title: qsTr("FALL SUN")
@@ -8,248 +9,10 @@ Window {
     height: 720
     visible: true
 
+
     StackView {
         id: stackView
-        initialItem: rWindow
-    }
-
-    //Registration page
-    Page {
-        id: rWindow
-        width: 1280
-        height: 720
-        visible: true
-        background: Rectangle {
-            color: "#B3B483"
-        }
-
-        Text {
-            text: "Регистрация"
-            x: rWindow.width / 2 - 143
-            y: 127
-            font.pixelSize: 50
-        }
-
-        Text {
-            text: "Логин"
-            x: rLoginwindow.x
-            y: rLoginwindow.y - 15
-            font.pixelSize: 10
-        }
-
-        Text {
-            text: "Пароль"
-            x: rPasswordwindow.x
-            y: rPasswordwindow.y - 15
-            font.pixelSize: 10
-        }
-
-        Text {
-            text: "Повторите пароль"
-            x: reprPasswordwindow.x
-            y: reprPasswordwindow.y - 15
-            font.pixelSize: 10
-        }
-
-        Button {
-            width: 225
-            height: 60
-            font.pixelSize: 20
-            text: "Зарегистрироваться"
-            x: 528
-            y: 532
-
-            background: Rectangle {
-                radius: 10
-                color: "#CCCCB2"
-            }
-        }
-
-        Button {
-            width: 225
-            height: 30
-            font.pixelSize: 15
-            text: "У меня уже есть аккаунт"
-            x: 528
-            y: 600
-
-            background: Rectangle {
-                radius: 10
-                color: "#CCCCB2"
-            }
-
-            onClicked: {
-                stackView.replace(lWindow);
-            }
-        }
-
-        Rectangle {
-            id: rLoginwindow
-            width: 225
-            height: 60
-            radius: 10
-            color: "#D9D9D9"
-            x: 528
-            y: 238
-            clip: true
-
-            TextInput {
-                id: rLogininput
-                color: "#151515"
-                font.pixelSize: 20
-                width: rLoginwindow.width
-                anchors.centerIn: rLoginwindow
-                focus: true
-            }
-        }
-
-        Rectangle {
-            id: rPasswordwindow
-            width: 225
-            height: 60
-            radius: 10
-            color: "#D9D9D9"
-            x: 528
-            y: 336
-            clip: true
-
-            TextInput {
-                id: rPasswordinput
-                color: "#151515"
-                font.pixelSize: 20
-                width: rPasswordwindow.width
-                anchors.centerIn: rPasswordwindow
-                focus: true
-            }
-        }
-
-        Rectangle {
-            id: reprPasswordwindow
-            width: 225
-            height: 60
-            radius: 10
-            color: "#D9D9D9"
-            x: 528
-            y: 434
-            clip: true
-
-            TextInput {
-                id: reprPasswordinput
-                color: "#151515"
-                font.pixelSize: 20
-                width: reprPasswordwindow.width
-                anchors.centerIn: reprPasswordwindow
-                focus: true
-            }
-        }
-    }
-
-    //Login page
-    Page {
-        id: lWindow
-        width: 1280
-        height: 720
-        visible: false
-        background: Rectangle {
-            color: "#B3B483"
-        }
-
-        Text {
-            text: "Авторизация"
-            x: lWindow.width / 2 - 154
-            y: 170
-            font.pixelSize: 50
-        }
-
-        Text {
-            text: "Логин"
-            x: loginwindow.x
-            y: loginwindow.y - 15
-            font.pixelSize: 10
-        }
-
-        Text {
-            text: "Пароль"
-            x: passwordwindow.x
-            y: passwordwindow.y - 15
-            font.pixelSize: 10
-        }
-
-        Button {
-            width: 225
-            height: 60
-            font.pixelSize: 25
-            text: "Войти"
-            x: 527
-            y: 477
-
-            background: Rectangle {
-                radius: 10
-                color: "#CCCCB2"
-            }
-
-            onClicked: {
-                stackView.replace(pStart); //test button
-            }
-        }
-
-        Button {
-            width: 225
-            height: 30
-            font.pixelSize: 15
-            text: "У меня нет аккаунта"
-            x: 527
-            y: 545
-
-            background: Rectangle {
-                radius: 10
-                color: "#CCCCB2"
-            }
-
-            onClicked: {
-                stackView.replace(rWindow);
-            }
-        }
-
-        Rectangle {
-            id: loginwindow
-            width: 225
-            height: 60
-            radius: 10
-            color: "#D9D9D9"
-            x: 527
-            y: 281
-            clip: true
-
-            TextInput {
-                id: logininput
-                color: "#151515"
-                font.pixelSize: 20
-                width: loginwindow.width
-                anchors.centerIn: loginwindow
-                focus: true
-            }
-        }
-
-        Rectangle {
-            id: passwordwindow
-            width: 225
-            height: 60
-            radius: 10
-            color: "#D9D9D9"
-            x: 527
-            y: 379
-            clip: true
-
-            TextInput {
-                id: passwordinput
-                color: "#151515"
-                font.pixelSize: 20
-                width: passwordwindow.width
-                anchors.centerIn: passwordwindow
-                focus: true
-            }
-        }
+        initialItem: pStart
     }
 
     //storyline
@@ -258,8 +21,9 @@ Window {
         width: 1280
         height: 720
         visible: false
-        background: Rectangle {
-            color: "#B3B483"
+        background: Image {
+            anchors.fill: parent
+            source: "qrc:/images/images/taganrog.png"
         }
 
         Text {
@@ -292,8 +56,11 @@ Window {
             height: 416
             radius: 10
             color: "#CCCCB2"
+            opacity: 0.5
             x: 158
             y: 140
+            border.color: "black"
+            border.width: 3
 
             Text {
                 text: "2122 год. Ученые давно стали предпологать о возможности подобного исхода.
@@ -311,6 +78,7 @@ Window {
                 x: 20
                 y: 10
                 font.pixelSize: 24
+                layer.enabled: false
             }
         }
     }
@@ -320,8 +88,9 @@ Window {
         width: 1280
         height: 720
         visible: false
-        background: Rectangle {
-            color: "#B3B483"
+        background: Image {
+            anchors.fill: parent
+            source: "qrc:/images/images/taganrog.png"
         }
 
         Text {
@@ -373,8 +142,9 @@ Window {
         width: 1280
         height: 720
         visible: false
-        background: Rectangle {
-            color: "#B3B483"
+        background: Image {
+            anchors.fill: parent
+            source: "qrc:/images/images/taganrog.png"
         }
 
         Text {
@@ -460,8 +230,9 @@ Window {
         width: 1280
         height: 720
         visible: false
-        background: Rectangle {
-            color: "#B3B483"
+        background: Image {
+            anchors.fill: parent
+            source: "qrc:/images/images/taganrog.png"
         }
 
         Text {
