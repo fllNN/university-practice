@@ -220,7 +220,7 @@ Window {
             }
 
             onClicked: {
-                stackView.replace(pStart);
+                Qt.quit();
             }
         }
     }
@@ -308,7 +308,7 @@ Window {
             }
 
             onClicked: {
-                stackView.replace(pStart);
+                Qt.quit();
             }
         }
     }
