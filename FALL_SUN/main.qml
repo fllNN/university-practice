@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
-import QtQuick.Controls
-
+import QtQuick.Controls 2.15
+import QtQuick.Controls.Basic
 
 Window {
     title: qsTr("FALL SUN")
@@ -9,10 +9,90 @@ Window {
     height: 720
     visible: true
 
-
     StackView {
         id: stackView
         initialItem: pStart
+    }
+
+    Text {
+        text: "FALL SUN"
+        x: parent.width / 2 - 107
+        y: 40
+        font.pixelSize: 50
+        font.bold: true
+    }
+
+    //gradients for buttons
+    Gradient {
+        id: normalGradient
+
+        GradientStop {position: 0.0; color: "#CB5D3B"}
+        GradientStop {position: 0.4; color: "#752F1A"}
+        GradientStop {position: 0.9; color: "#1B1716"}
+    }
+
+    Gradient {
+        id: hoveredGradient
+
+        GradientStop {position: 0.0; color: "#C58774"}
+        GradientStop {position: 0.4; color: "#934F3A"}
+        GradientStop {position: 0.9; color: "#141312"}
+    }
+
+    Gradient {
+        id: pressedGradient
+
+        GradientStop {position: 0.0; color: "#CF491F"}
+        GradientStop {position: 0.4; color: "#762811"}
+        GradientStop {position: 0.9; color: "#000000"}
+    }
+
+    //colors for texts
+    property string normalColorText: "#A4654F"
+    property string hoveredColorText: "#E0A690"
+    property string pressedColorText: "#934E35"
+
+    property string colorStoryText: "#D5876B"
+
+    //exit button
+    Button {
+        id: exitButton
+        width: 40
+        height: width
+
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+
+        anchors.rightMargin: 15
+        anchors.bottomMargin: 15
+        flat: true
+
+        contentItem: Text {
+
+            anchors.centerIn: parent
+            font.pixelSize: 20
+            text: "[->"
+            font.bold: true
+
+            color: (parent.pressed ? pressedColorText :
+                   (parent.hovered ? hoveredColorText :
+                                     normalColorText))
+
+        }
+
+        background: Rectangle {
+
+            radius: 10
+            border.color: "#7A594D"
+
+            gradient: (parent.pressed ? pressedGradient :
+                      (parent.hovered ? hoveredGradient :
+                                        normalGradient))
+        }
+
+        onClicked: {
+            Qt.quit();
+        }
     }
 
     //storyline
@@ -26,24 +106,37 @@ Window {
             source: "qrc:/images/images/taganrog.png"
         }
 
-        Text {
-            text: "FULL SUN"
-            x: pStart.width / 2 - 107
-            y: 40
-            font.pixelSize: 50
-        }
-
         Button {
             width: 225
             height: 60
-            font.pixelSize: 25
-            text: "Далее"
-            x: 527
-            y: 603
+            anchors.bottom: parent.bottom
+            anchors.right: parent.right
+
+            anchors.bottomMargin: 54
+            anchors.rightMargin: parent.width / 2 - width / 2
+
+            contentItem: Text {
+
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+
+                text: "Далее"
+                font.pixelSize: 25
+                font.bold: true
+
+                color: (parent.pressed ? pressedColorText :
+                       (parent.hovered ? hoveredColorText :
+                                         normalColorText))
+            }
 
             background: Rectangle {
+
                 radius: 10
-                color: "#CCCCB2"
+                border.color: "#7A594D"
+
+                gradient: (parent.pressed ? pressedGradient :
+                          (parent.hovered ? hoveredGradient :
+                                            normalGradient))
             }
 
             onClicked: {
@@ -52,17 +145,28 @@ Window {
         }
 
         Rectangle {
+            id: storyBlock
             width: 963
             height: 416
             radius: 10
-            color: "#CCCCB2"
-            opacity: 0.5
             x: 158
             y: 140
-            border.color: "black"
-            border.width: 3
+            border.color: "#7A594D"
+            border.width: 1
+
+            gradient: Gradient {
+                GradientStop {position: 0.0; color: "#CB5D3B"}
+                GradientStop {position: 0.4; color: "#752F1A"}
+                GradientStop {position: 0.9; color: "#1B1716"}
+            }
 
             Text {
+                id: textpStart
+                x: 20
+                y: 10
+                color: colorStoryText
+                font.pixelSize: 24
+
                 text: "2122 год. Ученые давно стали предпологать о возможности подобного исхода.
 Но никто и подумать не мог, что все произойдет так скоро...
 
@@ -70,15 +174,11 @@ Window {
 с самого ее зарождения, стала терять былую мощь.
 Лето, даже в самых жарких уголках нашей планеты, стало холоднее самой
 суровой зимы в Антарктиде.
-Катастрофа подбного масштаба повлекла за собой, раузмеется, не только смену
+Катастрофа подобного масштаба повлекла за собой, раузмеется, не только смену
 климата...
 
 Но, как и ко всему, люди вынуждены привыкать и адаптироваться.
 И вы не исключение!"
-                x: 20
-                y: 10
-                font.pixelSize: 24
-                layer.enabled: false
             }
         }
     }
@@ -91,13 +191,6 @@ Window {
         background: Image {
             anchors.fill: parent
             source: "qrc:/images/images/taganrog.png"
-        }
-
-        Text {
-            text: "FULL SUN"
-            x: pStart_2.width / 2 - 107
-            y: 40
-            font.pixelSize: 50
         }
 
         Button {
@@ -145,13 +238,6 @@ Window {
         background: Image {
             anchors.fill: parent
             source: "qrc:/images/images/taganrog.png"
-        }
-
-        Text {
-            text: "FULL SUN"
-            x: story1_1.width / 2 - 107
-            y: 40
-            font.pixelSize: 50
         }
 
         Rectangle {
@@ -233,13 +319,6 @@ Window {
         background: Image {
             anchors.fill: parent
             source: "qrc:/images/images/taganrog.png"
-        }
-
-        Text {
-            text: "FULL SUN"
-            x: story2_1.width / 2 - 107
-            y: 40
-            font.pixelSize: 50
         }
 
         Rectangle {
