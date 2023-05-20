@@ -52,7 +52,7 @@ Window {
     property string hoveredColorText: "#E0A690"
     property string pressedColorText: "#934E35"
 
-    property string colorStoryText: "#D5876B"
+    property string colorStoryText: "#BD9E83"
 
     //exit button
     Button {
@@ -68,7 +68,6 @@ Window {
         flat: true
 
         contentItem: Text {
-
             anchors.centerIn: parent
             font.pixelSize: 20
             text: "[->"
@@ -81,7 +80,6 @@ Window {
         }
 
         background: Rectangle {
-
             radius: 10
             border.color: "#7A594D"
 
@@ -101,6 +99,7 @@ Window {
         width: 1280
         height: 720
         visible: false
+
         background: Image {
             anchors.fill: parent
             source: "qrc:/images/images/taganrog.png"
@@ -116,7 +115,6 @@ Window {
             anchors.rightMargin: parent.width / 2 - width / 2
 
             contentItem: Text {
-
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
 
@@ -130,7 +128,6 @@ Window {
             }
 
             background: Rectangle {
-
                 radius: 10
                 border.color: "#7A594D"
 
@@ -161,11 +158,11 @@ Window {
             }
 
             Text {
-                id: textpStart
                 x: 20
                 y: 10
                 color: colorStoryText
-                font.pixelSize: 24
+                font.pixelSize: 22
+                font.bold: true
 
                 text: "2122 год. Ученые давно стали предпологать о возможности подобного исхода.
 Но никто и подумать не мог, что все произойдет так скоро...
@@ -188,6 +185,7 @@ Window {
         width: 1280
         height: 720
         visible: false
+
         background: Image {
             anchors.fill: parent
             source: "qrc:/images/images/taganrog.png"
@@ -196,14 +194,32 @@ Window {
         Button {
             width: 225
             height: 60
-            font.pixelSize: 25
-            text: "Начать историю"
-            x: 527
-            y: 603
+            anchors.bottom: parent.bottom
+            anchors.right: parent.right
+
+            anchors.bottomMargin: 54
+            anchors.rightMargin: parent.width / 2 - width / 2
+
+            contentItem: Text {
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+
+                text: "Начать историю"
+                font.pixelSize: 25
+                font.bold: true
+
+                color: (parent.pressed ? pressedColorText :
+                       (parent.hovered ? hoveredColorText :
+                                         normalColorText))
+            }
 
             background: Rectangle {
                 radius: 10
-                color: "#CCCCB2"
+                border.color: "#7A594D"
+
+                gradient: (parent.pressed ? pressedGradient :
+                          (parent.hovered ? hoveredGradient :
+                                            normalGradient))
             }
 
             onClicked: {
@@ -215,17 +231,28 @@ Window {
             width: 963
             height: 416
             radius: 10
-            color: "#CCCCB2"
             x: 158
             y: 140
+            border.color: "#7A594D"
+            border.width: 1
+
+            gradient: Gradient {
+                GradientStop {position: 0.0; color: "#CB5D3B"}
+                GradientStop {position: 0.4; color: "#752F1A"}
+                GradientStop {position: 0.9; color: "#1B1716"}
+            }
 
             Text {
+                x: 20
+                y: 10
+                color: colorStoryText
+                font.pixelSize: 22
+                font.bold: true
+
                 text: "Ваше путешествие начинается в России, Ростовской области, в городе Таганрог.
 Вам предстоит попытаться выжить в нынешних суровых реалиях.
 Лишь от ваших собственных решений зависит то, где вы окажитесь."
-                x: 20
-                y: 10
-                font.pixelSize: 24
+
             }
         }
     }
@@ -235,6 +262,7 @@ Window {
         width: 1280
         height: 720
         visible: false
+
         background: Image {
             anchors.fill: parent
             source: "qrc:/images/images/taganrog.png"
@@ -244,29 +272,55 @@ Window {
             width: 963
             height: 182
             radius: 10
-            color: "#CCCCB2"
             x: 158
             y: 140
+            border.color: "#7A594D"
+            border.width: 1
+
+            gradient: Gradient {
+                GradientStop {position: 0.0; color: "#CB5D3B"}
+                GradientStop {position: 1.2; color: "#1B1716"}
+            }
 
             Text {
-                text: "1.1"
                 x: 20
                 y: 10
+                color: colorStoryText
                 font.pixelSize: 24
+
+                text: "1.1"
             }
         }
 
         Button {
             width: 963
             height: 60
-            font.pixelSize: 25
-            text: "2.1"
-            x: 158
-            y: 346
+            anchors.bottom: parent.bottom
+            anchors.right: parent.right
+
+            anchors.bottomMargin: 315
+            anchors.rightMargin: parent.width / 2 - width / 2
+
+            contentItem: Text {
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+
+                text: "2.1"
+                font.pixelSize: 25
+                font.bold: true
+
+                color: (parent.pressed ? pressedColorText :
+                       (parent.hovered ? hoveredColorText :
+                                         normalColorText))
+            }
 
             background: Rectangle {
                 radius: 10
-                color: "#CCCCB2"
+                border.color: "#7A594D"
+
+                gradient: (parent.pressed ? pressedGradient :
+                          (parent.hovered ? hoveredGradient :
+                                            normalGradient))
             }
 
             onClicked: {
@@ -277,14 +331,32 @@ Window {
         Button {
             width: 963
             height: 60
-            font.pixelSize: 25
-            text: "2.2"
-            x: 158
-            y: 430
+            anchors.bottom: parent.bottom
+            anchors.right: parent.right
+
+            anchors.bottomMargin: 230
+            anchors.rightMargin: parent.width / 2 - width / 2
+
+            contentItem: Text {
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+
+                text: "2.2"
+                font.pixelSize: 25
+                font.bold: true
+
+                color: (parent.pressed ? pressedColorText :
+                       (parent.hovered ? hoveredColorText :
+                                         normalColorText))
+            }
 
             background: Rectangle {
                 radius: 10
-                color: "#CCCCB2"
+                border.color: "#7A594D"
+
+                gradient: (parent.pressed ? pressedGradient :
+                          (parent.hovered ? hoveredGradient :
+                                            normalGradient))
             }
 
             onClicked: {
@@ -295,18 +367,36 @@ Window {
         Button {
             width: 963
             height: 60
-            font.pixelSize: 25
-            text: "Слишком сложно (сдаться)"
-            x: 158
-            y: 514
+            anchors.bottom: parent.bottom
+            anchors.right: parent.right
+
+            anchors.bottomMargin: 145
+            anchors.rightMargin: parent.width / 2 - width / 2
+
+            contentItem: Text {
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+
+                text: "Слишком сложно (сдаться)"
+                font.pixelSize: 25
+                font.bold: true
+
+                color: (parent.pressed ? pressedColorText :
+                       (parent.hovered ? hoveredColorText :
+                                         normalColorText))
+            }
 
             background: Rectangle {
                 radius: 10
-                color: "#CCCCB2"
+                border.color: "#7A594D"
+
+                gradient: (parent.pressed ? pressedGradient :
+                          (parent.hovered ? hoveredGradient :
+                                            normalGradient))
             }
 
             onClicked: {
-                Qt.quit();
+                stackView.replace(pSurr);
             }
         }
     }
@@ -387,7 +477,54 @@ Window {
             }
 
             onClicked: {
-                Qt.quit();
+                stackView.replace(pSurr);
+            }
+        }
+    }
+
+    Page {
+        id: pSurr
+        width: 1280
+        height: 720
+        visible: false
+
+        background: Image {
+            anchors.fill: parent
+            source: "qrc:/images/images/taganrog.png"
+        }
+
+        Rectangle {
+            id: surrBlock
+            width: 963
+            height: 416
+            radius: 10
+            x: 158
+            y: 140
+            border.color: "#7A594D"
+            border.width: 1
+
+            gradient: Gradient {
+                GradientStop {position: 0.0; color: "#CB5D3B"}
+                GradientStop {position: 0.4; color: "#752F1A"}
+                GradientStop {position: 0.9; color: "#1B1716"}
+            }
+
+            Text {
+                x: 20
+                y: 10
+                color: colorStoryText
+                font.pixelSize: 22
+                font.bold: true
+
+                text: "Под суровым гнетом обстоятельств ваша психика не выдержала. Упав на землю
+в полном отчаянии, разочаровании в реальности и себе самом, Вы решили,
+что подобная жизнь не для вас и предпочли отдаться воле судьбы.
+
+К вашему счастью, это всего лишь иммитация возможного будущего, игра.
+На самом деле вам ничего не угрожает и вы можете попробовать снова пройти
+это испытание, как только наберетесь смелости и терпения.
+
+Ну а пока что, Вы знаете где выход."
             }
         }
     }
