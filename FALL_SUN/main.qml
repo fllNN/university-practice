@@ -2,6 +2,9 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Controls.Basic
+import Qt.labs.settings
+import Qt5Compat.GraphicalEffects
+import QtQuick.Effects
 
 Window {
     title: qsTr("FALL SUN")
@@ -20,76 +23,28 @@ Window {
         y: 40
         font.pixelSize: 50
         font.bold: true
+        color: "#000000"
     }
 
-    //gradients for buttons
-    Gradient {
-        id: normalGradient
+    TextColors {id: set}
 
-        GradientStop {position: 0.0; color: "#CB5D3B"}
-        GradientStop {position: 0.4; color: "#752F1A"}
-        GradientStop {position: 0.9; color: "#1B1716"}
-    }
+    Plot {id: plot}
 
-    Gradient {
-        id: hoveredGradient
-
-        GradientStop {position: 0.0; color: "#C58774"}
-        GradientStop {position: 0.4; color: "#934F3A"}
-        GradientStop {position: 0.9; color: "#141312"}
-    }
-
-    Gradient {
-        id: pressedGradient
-
-        GradientStop {position: 0.0; color: "#CF491F"}
-        GradientStop {position: 0.4; color: "#762811"}
-        GradientStop {position: 0.9; color: "#000000"}
-    }
-
-    //colors for texts
-    property string normalColorText: "#A4654F"
-    property string hoveredColorText: "#E0A690"
-    property string pressedColorText: "#934E35"
-
-    property string colorStoryText: "#BD9E83"
-
-    //exit button
-    Button {
+    GameButton {
         id: exitButton
         width: 40
         height: width
-
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-
         anchors.rightMargin: 15
         anchors.bottomMargin: 15
-        flat: true
-
-        contentItem: Text {
-            anchors.centerIn: parent
-            font.pixelSize: 20
-            text: "[->"
-            font.bold: true
-
-            color: (parent.pressed ? pressedColorText :
-                   (parent.hovered ? hoveredColorText :
-                                     normalColorText))
-
-        }
-
-        background: Rectangle {
-            radius: 10
-            border.color: "#7A594D"
-
-            gradient: (parent.pressed ? pressedGradient :
-                      (parent.hovered ? hoveredGradient :
-                                        normalGradient))
-        }
 
         onClicked: {
             Qt.quit();
+        }
+
+        Image {
+            anchors.fill: parent
+            source: "qrc:/images/images/exit.png"
+
         }
     }
 
@@ -105,77 +60,41 @@ Window {
             source: "qrc:/images/images/taganrog.png"
         }
 
-        Button {
+        GameButton {
             width: 225
             height: 60
-            anchors.bottom: parent.bottom
-            anchors.right: parent.right
-
             anchors.bottomMargin: 54
-            anchors.rightMargin: parent.width / 2 - width / 2
-
-            contentItem: Text {
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-
-                text: "Далее"
-                font.pixelSize: 25
-                font.bold: true
-
-                color: (parent.pressed ? pressedColorText :
-                       (parent.hovered ? hoveredColorText :
-                                         normalColorText))
-            }
-
-            background: Rectangle {
-                radius: 10
-                border.color: "#7A594D"
-
-                gradient: (parent.pressed ? pressedGradient :
-                          (parent.hovered ? hoveredGradient :
-                                            normalGradient))
-            }
+            text: "Далее"
 
             onClicked: {
                 stackView.replace(pStart_2);
+                tmrpStart_2.restart();
             }
         }
 
-        Rectangle {
-            id: storyBlock
-            width: 963
-            height: 416
-            radius: 10
-            x: 158
-            y: 140
-            border.color: "#7A594D"
-            border.width: 1
+        TextBlock {
 
-            gradient: Gradient {
-                GradientStop {position: 0.0; color: "#CB5D3B"}
-                GradientStop {position: 0.4; color: "#752F1A"}
-                GradientStop {position: 0.9; color: "#1B1716"}
-            }
-
-            Text {
-                x: 20
-                y: 10
-                color: colorStoryText
+            GameText {
+                id: ptpStart_1
                 font.pixelSize: 22
-                font.bold: true
 
-                text: "2122 год. Ученые давно стали предпологать о возможности подобного исхода.
-Но никто и подумать не мог, что все произойдет так скоро...
+                property int i
+                property string plttxt: plot.srcTxtpStart
 
-Звезда, которая сопровождала человека и всех живых существ на нашей планете
-с самого ее зарождения, стала терять былую мощь.
-Лето, даже в самых жарких уголках нашей планеты, стало холоднее самой
-суровой зимы в Антарктиде.
-Катастрофа подобного масштаба повлекла за собой, раузмеется, не только смену
-климата...
+                function type() {
+                    text = plttxt.slice(0, ++i);
+                    if (text === plttxt) return tmrpStart_1.stop()
+                    ptpStart_1.text = text;
+                }
 
-Но, как и ко всему, люди вынуждены привыкать и адаптироваться.
-И вы не исключение!"
+                Timer {
+                    id: tmrpStart_1
+                    interval: 10
+                    repeat: true
+                    running: true
+
+                    onTriggered: parent.type()
+                }
             }
         }
     }
@@ -191,68 +110,40 @@ Window {
             source: "qrc:/images/images/taganrog.png"
         }
 
-        Button {
+        GameButton {
             width: 225
             height: 60
-            anchors.bottom: parent.bottom
-            anchors.right: parent.right
-
             anchors.bottomMargin: 54
-            anchors.rightMargin: parent.width / 2 - width / 2
-
-            contentItem: Text {
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-
-                text: "Начать историю"
-                font.pixelSize: 25
-                font.bold: true
-
-                color: (parent.pressed ? pressedColorText :
-                       (parent.hovered ? hoveredColorText :
-                                         normalColorText))
-            }
-
-            background: Rectangle {
-                radius: 10
-                border.color: "#7A594D"
-
-                gradient: (parent.pressed ? pressedGradient :
-                          (parent.hovered ? hoveredGradient :
-                                            normalGradient))
-            }
+            text: "Начать историю"
 
             onClicked: {
                 stackView.replace(story1_1);
+                tmr1_1.start();
             }
         }
 
-        Rectangle {
-            width: 963
-            height: 416
-            radius: 10
-            x: 158
-            y: 140
-            border.color: "#7A594D"
-            border.width: 1
+        TextBlock {
 
-            gradient: Gradient {
-                GradientStop {position: 0.0; color: "#CB5D3B"}
-                GradientStop {position: 0.4; color: "#752F1A"}
-                GradientStop {position: 0.9; color: "#1B1716"}
-            }
-
-            Text {
-                x: 20
-                y: 10
-                color: colorStoryText
+            GameText {
+                id: ptpStart_2
                 font.pixelSize: 22
-                font.bold: true
 
-                text: "Ваше путешествие начинается в России, Ростовской области, в городе Таганрог.
-Вам предстоит попытаться выжить в нынешних суровых реалиях.
-Лишь от ваших собственных решений зависит то, где вы окажитесь."
+                property int i
 
+                function type() {
+                    text = plot.srcTxtpStart_2.slice(0, ++i);
+
+                    if (text === plot.srcTxtpStart_2) return tmrpStart_2.stop()
+                    ptpStart_2.text = text;
+                }
+
+                Timer {
+                    id: tmrpStart_2
+                    interval: 10
+                    repeat: true
+
+                    onTriggered: parent.type()
+                }
             }
         }
     }
@@ -268,135 +159,58 @@ Window {
             source: "qrc:/images/images/taganrog.png"
         }
 
-        Rectangle {
-            width: 963
+        TextBlock {
             height: 182
-            radius: 10
-            x: 158
-            y: 140
-            border.color: "#7A594D"
-            border.width: 1
 
-            gradient: Gradient {
-                GradientStop {position: 0.0; color: "#CB5D3B"}
-                GradientStop {position: 1.2; color: "#1B1716"}
-            }
+            GameText {
+                id: pt1_1
 
-            Text {
-                x: 20
-                y: 10
-                color: colorStoryText
-                font.pixelSize: 24
+                property int i
 
-                text: "1.1"
+                function type() {
+                    text = plot.srcTxtstory1_1.slice(0, ++i);
+
+                    if (text === plot.srcTxtstory1_1) return tmr1_1.stop()
+                    pt1_1.text = text;
+                }
+
+                Timer {
+                    id: tmr1_1
+                    interval: 10
+                    repeat: true
+
+                    onTriggered: pt1_1.type()
+                }
             }
         }
 
-        Button {
-            width: 963
-            height: 60
-            anchors.bottom: parent.bottom
-            anchors.right: parent.right
-
+        GameButton {
             anchors.bottomMargin: 315
-            anchors.rightMargin: parent.width / 2 - width / 2
-
-            contentItem: Text {
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-
-                text: "2.1"
-                font.pixelSize: 25
-                font.bold: true
-
-                color: (parent.pressed ? pressedColorText :
-                       (parent.hovered ? hoveredColorText :
-                                         normalColorText))
-            }
-
-            background: Rectangle {
-                radius: 10
-                border.color: "#7A594D"
-
-                gradient: (parent.pressed ? pressedGradient :
-                          (parent.hovered ? hoveredGradient :
-                                            normalGradient))
-            }
+            text: "2.1"
 
             onClicked: {
                 stackView.replace(story2_1);
+                tmr2_1.start();
             }
         }
 
-        Button {
-            width: 963
-            height: 60
-            anchors.bottom: parent.bottom
-            anchors.right: parent.right
-
+        GameButton {
             anchors.bottomMargin: 230
-            anchors.rightMargin: parent.width / 2 - width / 2
-
-            contentItem: Text {
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-
-                text: "2.2"
-                font.pixelSize: 25
-                font.bold: true
-
-                color: (parent.pressed ? pressedColorText :
-                       (parent.hovered ? hoveredColorText :
-                                         normalColorText))
-            }
-
-            background: Rectangle {
-                radius: 10
-                border.color: "#7A594D"
-
-                gradient: (parent.pressed ? pressedGradient :
-                          (parent.hovered ? hoveredGradient :
-                                            normalGradient))
-            }
+            text: "2.2"
 
             onClicked: {
-                stackView.replace(story1_1);
+                stackView.replace(story2_2);
+                tmr2_2.start();
             }
         }
 
-        Button {
-            width: 963
-            height: 60
-            anchors.bottom: parent.bottom
-            anchors.right: parent.right
-
+        GameButton {
             anchors.bottomMargin: 145
-            anchors.rightMargin: parent.width / 2 - width / 2
-
-            contentItem: Text {
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-
-                text: "Слишком сложно (сдаться)"
-                font.pixelSize: 25
-                font.bold: true
-
-                color: (parent.pressed ? pressedColorText :
-                       (parent.hovered ? hoveredColorText :
-                                         normalColorText))
-            }
-
-            background: Rectangle {
-                radius: 10
-                border.color: "#7A594D"
-
-                gradient: (parent.pressed ? pressedGradient :
-                          (parent.hovered ? hoveredGradient :
-                                            normalGradient))
-            }
+            text: "Слишком сложно (сдаться)"
 
             onClicked: {
                 stackView.replace(pSurr);
+                tmrSurr.start();
             }
         }
     }
@@ -406,78 +220,687 @@ Window {
         width: 1280
         height: 720
         visible: false
+
         background: Image {
             anchors.fill: parent
             source: "qrc:/images/images/taganrog.png"
         }
 
-        Rectangle {
-            width: 963
+        TextBlock {
             height: 182
-            radius: 10
-            color: "#CCCCB2"
-            x: 158
-            y: 140
 
-            Text {
-                text: "2.1"
-                x: 20
-                y: 10
-                font.pixelSize: 24
+            GameText {
+                id: pt2_1
+
+                property int i
+
+                function type() {
+                    text = plot.srcTxtstory2_1.slice(0, ++i);
+
+                    if (text === plot.srcTxtstory2_1) return tmr2_1.stop()
+                    pt2_1.text = text;
+                }
+
+                Timer {
+                    id: tmr2_1
+                    interval: 10
+                    repeat: true
+
+                    onTriggered: pt2_1.type()
+                }
             }
         }
 
-        Button {
-            width: 963
-            height: 60
-            font.pixelSize: 25
+        GameButton {
+            anchors.bottomMargin: 315
             text: "3.1"
-            x: 158
-            y: 346
-
-            background: Rectangle {
-                radius: 10
-                color: "#CCCCB2"
-            }
 
             onClicked: {
-                stackView.replace(story1_1);
+                stackView.replace(story3_1);
+                tmr3_1.start();
             }
         }
 
-        Button {
-            width: 963
-            height: 60
-            font.pixelSize: 25
+        GameButton {
+            anchors.bottomMargin: 230
             text: "3.2"
-            x: 158
-            y: 430
-
-            background: Rectangle {
-                radius: 10
-                color: "#CCCCB2"
-            }
 
             onClicked: {
-                stackView.replace(story1_1);
+                stackView.replace(story3_2);
+                tmr3_2.start();
             }
         }
 
-        Button {
-            width: 963
-            height: 60
-            font.pixelSize: 25
+        GameButton {
+            anchors.bottomMargin: 145
             text: "Слишком сложно (сдаться)"
-            x: 158
-            y: 514
-
-            background: Rectangle {
-                radius: 10
-                color: "#CCCCB2"
-            }
 
             onClicked: {
                 stackView.replace(pSurr);
+                tmrSurr.start();
+            }
+        }
+    }
+
+    Page {
+        id: story2_2
+        width: 1280
+        height: 720
+        visible: false
+
+        background: Image {
+            anchors.fill: parent
+            source: "qrc:/images/images/taganrog.png"
+        }
+
+        TextBlock {
+            height: 182
+
+            GameText {
+                id: pt2_2
+
+                property int i
+
+                function type() {
+                    text = plot.srcTxtstory2_2.slice(0, ++i);
+
+                    if (text === plot.srcTxtstory2_2) return tmr2_2.stop()
+                    pt2_2.text = text;
+                }
+
+                Timer {
+                    id: tmr2_2
+                    interval: 10
+                    repeat: true
+
+                    onTriggered: pt2_2.type()
+                }
+            }
+        }
+
+        GameButton {
+            anchors.bottomMargin: 315
+            text: "3.3"
+
+            onClicked: {
+                stackView.replace(story3_3);
+                tmr3_3.start();
+            }
+        }
+
+        GameButton {
+            anchors.bottomMargin: 230
+            text: "3.4"
+
+            onClicked: {
+                stackView.replace(story3_4);
+                tmr3_4.start();
+            }
+        }
+
+        GameButton {
+            anchors.bottomMargin: 145
+            text: "Слишком сложно (сдаться)"
+
+            onClicked: {
+                stackView.replace(pSurr);
+                tmrSurr.start();
+            }
+        }
+    }
+
+    Page {
+        id: story3_1
+        width: 1280
+        height: 720
+        visible: false
+
+        background: Image {
+            anchors.fill: parent
+            source: "qrc:/images/images/taganrog.png"
+        }
+
+        TextBlock {
+            height: 182
+
+            GameText {
+                id: pt3_1
+
+                property int i
+
+                function type() {
+                    text = plot.srcTxtstory3_1.slice(0, ++i);
+
+                    if (text === plot.srcTxtstory3_1) return tmr3_1.stop()
+                    pt3_1.text = text;
+                }
+
+                Timer {
+                    id: tmr3_1
+                    interval: 10
+                    repeat: true
+
+                    onTriggered: pt3_1.type()
+                }
+            }
+        }
+
+        GameButton {
+            anchors.bottomMargin: 315
+            text: "4.1"
+
+            onClicked: {
+                stackView.replace(story4_1);
+                tmr4_1.start();
+            }
+        }
+
+        GameButton {
+            anchors.bottomMargin: 230
+            text: "4.2"
+
+            onClicked: {
+                stackView.replace(story4_2);
+                tmr4_2.start();
+            }
+        }
+
+        GameButton {
+            anchors.bottomMargin: 145
+            text: "Слишком сложно (сдаться)"
+
+            onClicked: {
+                stackView.replace(pSurr);
+                tmrSurr.start();
+            }
+        }
+    }
+
+    Page {
+        id: story3_2
+        width: 1280
+        height: 720
+        visible: false
+
+        background: Image {
+            anchors.fill: parent
+            source: "qrc:/images/images/taganrog.png"
+        }
+
+        TextBlock {
+            height: 182
+
+            GameText {
+                id: pt3_2
+
+                property int i
+
+                function type() {
+                    text = plot.srcTxtstory3_2.slice(0, ++i);
+
+                    if (text === plot.srcTxtstory3_2) return tmr3_2.stop()
+                    pt3_2.text = text;
+                }
+
+                Timer {
+                    id: tmr3_2
+                    interval: 10
+                    repeat: true
+
+                    onTriggered: pt3_2.type()
+                }
+            }
+        }
+
+        GameButton {
+            anchors.bottomMargin: 315
+            text: "4.3"
+
+            onClicked: {
+                stackView.replace(story4_3);
+                tmr4_3.start();
+            }
+        }
+
+        GameButton {
+            anchors.bottomMargin: 230
+            text: "4.4"
+
+            onClicked: {
+                stackView.replace(story4_4);
+                tmr4_4.start();
+            }
+        }
+
+        GameButton {
+            anchors.bottomMargin: 145
+            text: "Слишком сложно (сдаться)"
+
+            onClicked: {
+                stackView.replace(pSurr);
+                tmrSurr.start();
+            }
+        }
+    }
+
+    Page {
+        id: story3_3
+        width: 1280
+        height: 720
+        visible: false
+
+        background: Image {
+            anchors.fill: parent
+            source: "qrc:/images/images/taganrog.png"
+        }
+
+        TextBlock {
+            height: 182
+
+            GameText {
+                id: pt3_3
+
+                property int i
+
+                function type() {
+                    text = plot.srcTxtstory3_3.slice(0, ++i);
+
+                    if (text === plot.srcTxtstory3_3) return tmr3_3.stop()
+                    pt3_3.text = text;
+                }
+
+                Timer {
+                    id: tmr3_3
+                    interval: 10
+                    repeat: true
+
+                    onTriggered: pt3_3.type()
+                }
+            }
+        }
+
+        GameButton {
+            anchors.bottomMargin: 315
+            text: "4.5"
+
+            onClicked: {
+                stackView.replace(story4_5);
+                tmr4_5.start();
+            }
+        }
+
+        GameButton {
+            anchors.bottomMargin: 230
+            text: "4.6"
+
+            onClicked: {
+                stackView.replace(story4_6);
+                tmr4_6.start();
+            }
+        }
+
+        GameButton {
+            anchors.bottomMargin: 145
+            text: "Слишком сложно (сдаться)"
+
+            onClicked: {
+                stackView.replace(pSurr);
+                tmrSurr.start();
+            }
+        }
+    }
+
+    Page {
+        id: story3_4
+        width: 1280
+        height: 720
+        visible: false
+
+        background: Image {
+            anchors.fill: parent
+            source: "qrc:/images/images/taganrog.png"
+        }
+
+        TextBlock {
+            height: 182
+
+            GameText {
+                id: pt3_4
+
+                property int i
+
+                function type() {
+                    text = plot.srcTxtstory3_4.slice(0, ++i);
+
+                    if (text === plot.srcTxtstory3_4) return tmr3_4.stop()
+                    pt3_4.text = text;
+                }
+
+                Timer {
+                    id: tmr3_4
+                    interval: 10
+                    repeat: true
+
+                    onTriggered: pt3_4.type()
+                }
+            }
+        }
+
+        GameButton {
+            anchors.bottomMargin: 315
+            text: "4.7"
+
+            onClicked: {
+                stackView.replace(story4_7);
+                tmr4_7.start();
+            }
+        }
+
+        GameButton {
+            anchors.bottomMargin: 230
+            text: "4.8"
+
+            onClicked: {
+                stackView.replace(story4_8);
+                tmr4_8.start();
+            }
+        }
+
+        GameButton {
+            anchors.bottomMargin: 145
+            text: "Слишком сложно (сдаться)"
+
+            onClicked: {
+                stackView.replace(pSurr);
+                tmrSurr.start();
+            }
+        }
+    }
+
+    Page {
+        id: story4_1
+        width: 1280
+        height: 720
+        visible: false
+
+        background: Image {
+            anchors.fill: parent
+            source: "qrc:/images/images/taganrog.png"
+        }
+
+        TextBlock {
+
+            GameText {
+                id: pt4_1
+
+                property int i
+
+                function type() {
+                    text = plot.srcTxtstory4_1.slice(0, ++i);
+
+                    if (text === plot.srcTxtstory4_1) return tmr4_1.stop()
+                    pt4_1.text = text;
+                }
+
+                Timer {
+                    id: tmr4_1
+                    interval: 10
+                    repeat: true
+
+                    onTriggered: pt4_1.type()
+                }
+            }
+        }
+    }
+
+    Page {
+        id: story4_2
+        width: 1280
+        height: 720
+        visible: false
+
+        background: Image {
+            anchors.fill: parent
+            source: "qrc:/images/images/taganrog.png"
+        }
+
+        TextBlock {
+
+            GameText {
+                id: pt4_2
+
+                property int i
+
+                function type() {
+                    text = plot.srcTxtstory4_2.slice(0, ++i);
+
+                    if (text === plot.srcTxtstory4_2) return tmr4_2.stop()
+                    pt4_2.text = text;
+                }
+
+                Timer {
+                    id: tmr4_2
+                    interval: 10
+                    repeat: true
+
+                    onTriggered: pt4_2.type()
+                }
+            }
+        }
+    }
+
+    Page {
+        id: story4_3
+        width: 1280
+        height: 720
+        visible: false
+
+        background: Image {
+            anchors.fill: parent
+            source: "qrc:/images/images/taganrog.png"
+        }
+
+        TextBlock {
+
+            GameText {
+                id: pt4_3
+
+                property int i
+
+                function type() {
+                    text = plot.srcTxtstory4_3.slice(0, ++i);
+
+                    if (text === plot.srcTxtstory4_3) return tmr4_3.stop()
+                    pt4_3.text = text;
+                }
+
+                Timer {
+                    id: tmr4_3
+                    interval: 10
+                    repeat: true
+
+                    onTriggered: pt4_3.type()
+                }
+            }
+        }
+    }
+
+    Page {
+        id: story4_4
+        width: 1280
+        height: 720
+        visible: false
+
+        background: Image {
+            anchors.fill: parent
+            source: "qrc:/images/images/taganrog.png"
+        }
+
+        TextBlock {
+
+            GameText {
+                id: pt4_4
+
+                property int i
+
+                function type() {
+                    text = plot.srcTxtstory4_4.slice(0, ++i);
+
+                    if (text === plot.srcTxtstory4_4) return tmr4_4.stop()
+                    pt4_4.text = text;
+                }
+
+                Timer {
+                    id: tmr4_4
+                    interval: 10
+                    repeat: true
+
+                    onTriggered: pt4_4.type()
+                }
+            }
+        }
+    }
+
+    Page {
+        id: story4_5
+        width: 1280
+        height: 720
+        visible: false
+
+        background: Image {
+            anchors.fill: parent
+            source: "qrc:/images/images/taganrog.png"
+        }
+
+        TextBlock {
+
+            GameText {
+                id: pt4_5
+
+                property int i
+
+                function type() {
+                    text = plot.srcTxtstory4_5.slice(0, ++i);
+
+                    if (text === plot.srcTxtstory4_5) return tmr4_5.stop()
+                    pt4_5.text = text;
+                }
+
+                Timer {
+                    id: tmr4_5
+                    interval: 10
+                    repeat: true
+
+                    onTriggered: pt4_5.type()
+                }
+            }
+        }
+    }
+
+    Page {
+        id: story4_6
+        width: 1280
+        height: 720
+        visible: false
+
+        background: Image {
+            anchors.fill: parent
+            source: "qrc:/images/images/taganrog.png"
+        }
+
+        TextBlock {
+
+            GameText {
+                id: pt4_6
+
+                property int i
+
+                function type() {
+                    text = plot.srcTxtstory4_6.slice(0, ++i);
+
+                    if (text === plot.srcTxtstory4_6) return tmr4_6.stop()
+                    pt4_6.text = text;
+                }
+
+                Timer {
+                    id: tmr4_6
+                    interval: 10
+                    repeat: true
+
+                    onTriggered: pt4_6.type()
+                }
+            }
+        }
+    }
+
+    Page {
+        id: story4_7
+        width: 1280
+        height: 720
+        visible: false
+
+        background: Image {
+            anchors.fill: parent
+            source: "qrc:/images/images/taganrog.png"
+        }
+
+        TextBlock {
+
+            GameText {
+                id: pt4_7
+
+                property int i
+
+                function type() {
+                    text = plot.srcTxtstory4_7.slice(0, ++i);
+
+                    if (text === plot.srcTxtstory4_7) return tmr4_7.stop()
+                    pt4_7.text = text;
+                }
+
+                Timer {
+                    id: tmr4_7
+                    interval: 10
+                    repeat: true
+
+                    onTriggered: pt4_7.type()
+                }
+            }
+        }
+    }
+
+    Page {
+        id: story4_8
+        width: 1280
+        height: 720
+        visible: false
+
+        background: Image {
+            anchors.fill: parent
+            source: "qrc:/images/images/taganrog.png"
+        }
+
+        TextBlock {
+
+            GameText {
+                id: pt4_8
+
+                property int i
+
+                function type() {
+                    text = plot.srcTxtstory4_8.slice(0, ++i);
+
+                    if (text === plot.srcTxtstory4_8) return tmr4_8.stop()
+                    pt4_8.text = text;
+                }
+
+                Timer {
+                    id: tmr4_8
+                    interval: 10
+                    repeat: true
+
+                    onTriggered: pt4_8.type()
+                }
             }
         }
     }
@@ -493,38 +916,27 @@ Window {
             source: "qrc:/images/images/taganrog.png"
         }
 
-        Rectangle {
-            id: surrBlock
-            width: 963
-            height: 416
-            radius: 10
-            x: 158
-            y: 140
-            border.color: "#7A594D"
-            border.width: 1
+        TextBlock {
 
-            gradient: Gradient {
-                GradientStop {position: 0.0; color: "#CB5D3B"}
-                GradientStop {position: 0.4; color: "#752F1A"}
-                GradientStop {position: 0.9; color: "#1B1716"}
-            }
+            GameText {
+                id: ptSurr
 
-            Text {
-                x: 20
-                y: 10
-                color: colorStoryText
-                font.pixelSize: 22
-                font.bold: true
+                property int i
 
-                text: "Под суровым гнетом обстоятельств ваша психика не выдержала. Упав на землю
-в полном отчаянии, разочаровании в реальности и себе самом, Вы решили,
-что подобная жизнь не для вас и предпочли отдаться воле судьбы.
+                function type() {
+                    text = plot.srcTxtpSurr.slice(0, ++i);
 
-К вашему счастью, это всего лишь иммитация возможного будущего, игра.
-На самом деле вам ничего не угрожает и вы можете попробовать снова пройти
-это испытание, как только наберетесь смелости и терпения.
+                    if (text === plot.srcTxtpSurr) return tmrSurr.stop()
+                    ptSurr.text = text;
+                }
 
-Ну а пока что, Вы знаете где выход."
+                Timer {
+                    id: tmrSurr
+                    interval: 10
+                    repeat: true
+
+                    onTriggered: ptSurr.type()
+                }
             }
         }
     }

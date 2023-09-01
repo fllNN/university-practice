@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/images">
         <file>images/taganrog.png</file>
+        <file>images/exit.png</file>
     </qresource>
 </RCC>
