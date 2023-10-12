@@ -37,14 +37,14 @@ Window {
         anchors.rightMargin: 15
         anchors.bottomMargin: 15
 
-        onClicked: {
-            Qt.quit();
-        }
-
         Image {
             anchors.fill: parent
             source: "qrc:/images/images/exit.png"
 
+        }
+
+        onClicked: {
+            Qt.quit();
         }
     }
 
@@ -156,7 +156,7 @@ Window {
 
         background: Image {
             anchors.fill: parent
-            source: "qrc:/images/images/taganrog.png"
+            source: "qrc:/images/images/sclad.png"
         }
 
         TextBlock {
@@ -186,7 +186,7 @@ Window {
 
         GameButton {
             anchors.bottomMargin: 315
-            text: "2.1"
+            text: "Старый генератор"
 
             onClicked: {
                 stackView.replace(story2_1);
@@ -196,7 +196,7 @@ Window {
 
         GameButton {
             anchors.bottomMargin: 230
-            text: "2.2"
+            text: "Какая-то карта"
 
             onClicked: {
                 stackView.replace(story2_2);
@@ -223,7 +223,7 @@ Window {
 
         background: Image {
             anchors.fill: parent
-            source: "qrc:/images/images/taganrog.png"
+            source: "qrc:/images/images/generator.png"
         }
 
         TextBlock {
@@ -253,7 +253,7 @@ Window {
 
         GameButton {
             anchors.bottomMargin: 315
-            text: "3.1"
+            text: "Испытать свою удачу и попробовать его восстановить"
 
             onClicked: {
                 stackView.replace(story3_1);
@@ -263,7 +263,7 @@ Window {
 
         GameButton {
             anchors.bottomMargin: 230
-            text: "3.2"
+            text: "Найти другой источник энергии"
 
             onClicked: {
                 stackView.replace(story3_2);
@@ -290,7 +290,7 @@ Window {
 
         background: Image {
             anchors.fill: parent
-            source: "qrc:/images/images/taganrog.png"
+            source: "qrc:/images/images/karta.png"
         }
 
         TextBlock {
@@ -320,7 +320,7 @@ Window {
 
         GameButton {
             anchors.bottomMargin: 315
-            text: "3.3"
+            text: "Все же отправиться на поиски выживших"
 
             onClicked: {
                 stackView.replace(story3_3);
@@ -330,7 +330,7 @@ Window {
 
         GameButton {
             anchors.bottomMargin: 230
-            text: "3.4"
+            text: "Выживать в одиночку"
 
             onClicked: {
                 stackView.replace(story3_4);
@@ -357,7 +357,7 @@ Window {
 
         background: Image {
             anchors.fill: parent
-            source: "qrc:/images/images/taganrog.png"
+            source: "qrc:/images/images/generator.png"
         }
 
         TextBlock {
@@ -387,7 +387,7 @@ Window {
 
         GameButton {
             anchors.bottomMargin: 315
-            text: "4.1"
+            text: "Орел"
 
             onClicked: {
                 stackView.replace(story4_1);
@@ -397,7 +397,7 @@ Window {
 
         GameButton {
             anchors.bottomMargin: 230
-            text: "4.2"
+            text: "Решка"
 
             onClicked: {
                 stackView.replace(story4_2);
@@ -424,7 +424,7 @@ Window {
 
         background: Image {
             anchors.fill: parent
-            source: "qrc:/images/images/taganrog.png"
+            source: "qrc:/images/images/sclad.png"
         }
 
         TextBlock {
@@ -454,7 +454,7 @@ Window {
 
         GameButton {
             anchors.bottomMargin: 315
-            text: "4.3"
+            text: "Солнечные батареи"
 
             onClicked: {
                 stackView.replace(story4_3);
@@ -464,7 +464,7 @@ Window {
 
         GameButton {
             anchors.bottomMargin: 230
-            text: "4.4"
+            text: "Ветрогенератор"
 
             onClicked: {
                 stackView.replace(story4_4);
@@ -491,7 +491,7 @@ Window {
 
         background: Image {
             anchors.fill: parent
-            source: "qrc:/images/images/taganrog.png"
+            source: "qrc:/images/images/pustosh.png"
         }
 
         TextBlock {
@@ -521,7 +521,7 @@ Window {
 
         GameButton {
             anchors.bottomMargin: 315
-            text: "4.5"
+            text: "Пойти по наиболее безопасному пути"
 
             onClicked: {
                 stackView.replace(story4_5);
@@ -531,7 +531,7 @@ Window {
 
         GameButton {
             anchors.bottomMargin: 230
-            text: "4.6"
+            text: "Довериться подозрительной метке"
 
             onClicked: {
                 stackView.replace(story4_6);
@@ -558,7 +558,7 @@ Window {
 
         background: Image {
             anchors.fill: parent
-            source: "qrc:/images/images/taganrog.png"
+            source: "qrc:/images/images/karta.png"
         }
 
         TextBlock {
@@ -588,7 +588,7 @@ Window {
 
         GameButton {
             anchors.bottomMargin: 315
-            text: "4.7"
+            text: "Строить долговечное надежное укрытие"
 
             onClicked: {
                 stackView.replace(story4_7);
@@ -598,7 +598,7 @@ Window {
 
         GameButton {
             anchors.bottomMargin: 230
-            text: "4.8"
+            text: "Отправиться в путешествие"
 
             onClicked: {
                 stackView.replace(story4_8);
@@ -625,7 +625,7 @@ Window {
 
         background: Image {
             anchors.fill: parent
-            source: "qrc:/images/images/taganrog.png"
+            source: "qrc:/images/images/generator.png"
         }
 
         TextBlock {
@@ -661,7 +661,7 @@ Window {
 
         background: Image {
             anchors.fill: parent
-            source: "qrc:/images/images/taganrog.png"
+            source: "qrc:/images/images/generator.png"
         }
 
         TextBlock {
@@ -697,7 +697,7 @@ Window {
 
         background: Image {
             anchors.fill: parent
-            source: "qrc:/images/images/taganrog.png"
+            source: "qrc:/images/images/solnbat.png"
         }
 
         TextBlock {
@@ -733,7 +733,7 @@ Window {
 
         background: Image {
             anchors.fill: parent
-            source: "qrc:/images/images/taganrog.png"
+            source: "qrc:/images/images/vetrogenerator.png"
         }
 
         TextBlock {
@@ -769,7 +769,7 @@ Window {
 
         background: Image {
             anchors.fill: parent
-            source: "qrc:/images/images/taganrog.png"
+            source: "qrc:/images/images/vijivshie.png"
         }
 
         TextBlock {
@@ -805,7 +805,7 @@ Window {
 
         background: Image {
             anchors.fill: parent
-            source: "qrc:/images/images/taganrog.png"
+            source: "qrc:/images/images/noj.png"
         }
 
         TextBlock {
@@ -841,7 +841,7 @@ Window {
 
         background: Image {
             anchors.fill: parent
-            source: "qrc:/images/images/taganrog.png"
+            source: "qrc:/images/images/ukritie.png"
         }
 
         TextBlock {
@@ -877,7 +877,7 @@ Window {
 
         background: Image {
             anchors.fill: parent
-            source: "qrc:/images/images/taganrog.png"
+            source: "qrc:/images/images/pustosh.png"
         }
 
         TextBlock {
@@ -913,7 +913,7 @@ Window {
 
         background: Image {
             anchors.fill: parent
-            source: "qrc:/images/images/taganrog.png"
+            source: "qrc:/images/images/giveup.png"
         }
 
         TextBlock {

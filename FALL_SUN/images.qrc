@@ -2,5 +2,16 @@
     <qresource prefix="/images">
         <file>images/taganrog.png</file>
         <file>images/exit.png</file>
+        <file>images/generator.png</file>
+        <file>images/karta.png</file>
+        <file>images/noj.png</file>
+        <file>images/poisk.png</file>
+        <file>images/sclad.png</file>
+        <file>images/solnbat.png</file>
+        <file>images/ukritie.png</file>
+        <file>images/vetrogenerator.png</file>
+        <file>images/vijivshie.png</file>
+        <file>images/giveup.png</file>
+        <file>images/pustosh.png</file>
     </qresource>
 </RCC>

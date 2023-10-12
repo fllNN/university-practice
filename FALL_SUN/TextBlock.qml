@@ -15,7 +15,7 @@ Rectangle {
     y: 140
     border.color: "#BD9E83"
     border.width: 2
-    color: "#00000000"
+    color: "#ff0f0f0f"
 
     ShaderEffectSource {
         id: effectSource

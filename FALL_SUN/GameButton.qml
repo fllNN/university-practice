@@ -46,12 +46,12 @@ Button {
         anchors.fill: aw
         source: aw
         horizontalOffset: 0
-        verticalOffset: 4
-        radius: 10
+        verticalOffset: 2
+        radius: 9
         samples: 16
         color: "#393646"
         transparentBorder: true
-        spread: 0.1
+        spread: 0.4
     }
 
     SequentialAnimation {
